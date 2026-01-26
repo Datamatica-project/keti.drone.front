@@ -1,65 +1,49 @@
-import Image from "next/image";
+import CesiumViewer from "@/components/cesium/CesiumViewer";
 
-export default function Home() {
+export const metadata = {
+  title: "Cesium 3D 지도",
+  description: "Cesium.js를 사용한 3D 지구본 뷰어",
+};
+
+/**
+ * Cesium 3D 지도 페이지
+ * /cesium 경로로 접근 가능합니다.
+ */
+export default function CesiumPage() {
+  const flightPath = [
+    { "longitude": 127.5000, "latitude": 37.5000, "height": 50 },
+    { "longitude": 127.5005, "latitude": 37.5005, "height": 55 },
+    { "longitude": 127.5010, "latitude": 37.5010, "height": 60 },
+    { "longitude": 127.5016, "latitude": 37.5014, "height": 65 },
+    { "longitude": 127.5022, "latitude": 37.5017, "height": 70 },
+    { "longitude": 127.5028, "latitude": 37.5019, "height": 75 },
+    { "longitude": 127.5034, "latitude": 37.5020, "height": 80 },
+    { "longitude": 127.5040, "latitude": 37.5020, "height": 85 },
+    { "longitude": 127.5045, "latitude": 37.5018, "height": 90 },
+    { "longitude": 127.5050, "latitude": 37.5015, "height": 95 },
+    { "longitude": 127.5055, "latitude": 37.5012, "height": 100 },
+    { "longitude": 127.5060, "latitude": 37.5008, "height": 105 },
+    { "longitude": 127.5065, "latitude": 37.5004, "height": 110 },
+    { "longitude": 127.5070, "latitude": 37.5000, "height": 115 },
+    { "longitude": 127.5075, "latitude": 37.4996, "height": 120 },
+    { "longitude": 127.5080, "latitude": 37.4992, "height": 125 },
+    { "longitude": 127.5085, "latitude": 37.4988, "height": 130 },
+    { "longitude": 127.5090, "latitude": 37.4984, "height": 135 },
+  ]
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="w-full h-screen">
+      <CesiumViewer
+        initialView={{
+          longitude: 127.5, // 서울
+          latitude: 37.5,
+          height: 300,
+        }}
+        flightPath={flightPath}
+        pathColor="#00ff00"
+        pathWidth={3}
+        animate={true}        // 애니메이션 활성화
+        flightDuration={20}   // 20초 동안 비행
+      />
     </div>
   );
 }
