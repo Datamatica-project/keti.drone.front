@@ -18,6 +18,7 @@ import {
   SampledProperty,
   ClockRange,
   Quaternion,
+  CesiumTerrainProvider,
 } from "cesium";
 
 // Cesium Ion 토큰 (필요시 환경변수로 관리)
@@ -275,7 +276,10 @@ export default function CesiumViewer({
       Ion.defaultAccessToken = cesiumToken;
 
       if (containerRef.current) {
-        const viewer = new Viewer(containerRef.current, {});
+        const terrainProvider = await CesiumTerrainProvider.fromIonAssetId(1);
+        const viewer = new Viewer(containerRef.current, {
+          terrainProvider,
+        });
         viewerRef.current = viewer;
 
         // 초기 카메라 위치로 이동
